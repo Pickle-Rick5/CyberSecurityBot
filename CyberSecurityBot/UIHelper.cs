@@ -22,7 +22,7 @@ public class UIHelper
     // Section Divider
     public static void ShowDivider()
     {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine("\n──────────────────────────────────────────────\n");
         Console.ResetColor();
     }
