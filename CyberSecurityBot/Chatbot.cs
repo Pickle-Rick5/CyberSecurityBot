@@ -20,7 +20,7 @@ public class ChatBot
     public static void StartChat(string name)
     {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"\nWelcome {name}! I'm here to help you stay safe online.");
+        Console.WriteLine($"\nWelcome {name}! I'm your personal chatbot, here to help you stay safe online.");
         Console.ResetColor();
 
         while (true)
