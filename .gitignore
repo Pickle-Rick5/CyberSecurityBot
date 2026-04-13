@@ -1,0 +1,13 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Build folders
+bin/
+obj/
+
+# Build outputs
+*.exe
+*.dll
+*.pdb
