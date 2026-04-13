@@ -7,7 +7,7 @@ public class UIHelper
     {
         Console.Clear();
 
-        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.ForegroundColor = ConsoleColor.Blue;
 
         Console.WriteLine("╔══════════════════════════════════════════════╗");
         Console.WriteLine("║      🔐 CYBERSECURITY AWARENESS BOT         ║");
