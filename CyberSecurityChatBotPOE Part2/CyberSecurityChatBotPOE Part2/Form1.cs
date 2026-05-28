@@ -21,5 +21,36 @@ namespace CyberSecurityChatBotPOE_Part2
         {
 
         }
+
+            private void btnSend_Click(object sender, EventArgs e)
+        {
+            string userInput = textBox2.Text;
+
+            richTextBox1.AppendText("You: " + userInput + Environment.NewLine);
+
+            string response = "";
+
+            if (userInput.ToLower().Contains("password"))
+            {
+                response = "Use strong unique passwords.";
+            }
+            else if (userInput.ToLower().Contains("scam"))
+            {
+                response = "Avoid suspicious links and messages.";
+            }
+            else if (userInput.ToLower().Contains("privacy"))
+            {
+                response = "Review your privacy settings regularly.";
+            }
+            else
+            {
+                response = "I do not understand. Can you rephrase?";
+            }
+
+            richTextBox1.AppendText("Bot: " + response + Environment.NewLine);
+
+            textBox2.Clear();
+        }
     }
-}
+    }
+

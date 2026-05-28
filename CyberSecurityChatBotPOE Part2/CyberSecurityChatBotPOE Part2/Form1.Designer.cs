@@ -32,7 +32,7 @@
             richTextBox1 = new RichTextBox();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            button1 = new Button();
+            btnSend = new Button();
             SuspendLayout();
             // 
             // label1
@@ -73,15 +73,17 @@
             textBox2.TabIndex = 3;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
-            // button1
+            // btnSend
             // 
-            button1.AccessibleName = "btnSend";
-            button1.Location = new Point(787, 413);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 33);
-            button1.TabIndex = 4;
-            button1.Text = "SEND";
-            button1.UseVisualStyleBackColor = true;
+            btnSend.AccessibleDescription = "btnSend";
+            btnSend.AccessibleName = "btnSend";
+            btnSend.Location = new Point(787, 413);
+            btnSend.Name = "btnSend";
+            btnSend.Size = new Size(75, 33);
+            btnSend.TabIndex = 4;
+            btnSend.Text = "SEND";
+            btnSend.UseVisualStyleBackColor = true;
+            btnSend.Click += btnSend_Click;
             // 
             // Form1
             // 
@@ -90,7 +92,7 @@
             BackColor = SystemColors.ControlLight;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1077, 585);
-            Controls.Add(button1);
+            Controls.Add(btnSend);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(richTextBox1);
@@ -111,6 +113,6 @@
         private RichTextBox richTextBox1;
         private TextBox textBox1;
         private TextBox textBox2;
-        private Button button1;
+        private Button btnSend;
     }
 }
