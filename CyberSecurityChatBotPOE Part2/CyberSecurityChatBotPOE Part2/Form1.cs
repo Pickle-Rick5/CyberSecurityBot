@@ -32,7 +32,16 @@ namespace CyberSecurityChatBotPOE_Part2
 
             if (userInput.ToLower().Contains("password"))
             {
-                response = "Use strong unique passwords.";
+                string[] passwordResponses =
+            {
+                "Use strong unique passwords.",
+                "Avoid using personal information in passwords.",
+                "Change passwords regularly for better security."
+            };
+
+                Random random = new Random();
+
+                response = passwordResponses[random.Next(passwordResponses.Length)];
             }
             else if (userInput.ToLower().Contains("scam"))
             {
