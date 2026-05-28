@@ -17,3 +17,4 @@ C:\Users\User\source\repos\CyberSecurityBot\CyberSecurityBot\obj\Debug\net10.0\r
 C:\Users\User\source\repos\CyberSecurityBot\CyberSecurityBot\obj\Debug\net10.0\CyberSecurityBot.pdb
 C:\Users\User\source\repos\CyberSecurityBot\CyberSecurityBot\obj\Debug\net10.0\CyberSecurityBot.genruntimeconfig.cache
 C:\Users\User\source\repos\CyberSecurityBot\CyberSecurityBot\obj\Debug\net10.0\ref\CyberSecurityBot.dll
+C:\Users\User\source\repos\CyberSecurityBot\CyberSecurityBot\obj\Debug\net10.0\CyberSecurityBot.sourcelink.json
