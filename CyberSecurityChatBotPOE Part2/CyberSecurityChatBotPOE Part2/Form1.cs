@@ -2,6 +2,7 @@ namespace CyberSecurityChatBotPOE_Part2
 {
     public partial class Form1 : Form
     {
+        string lastTopic = "";
         public Form1()
         {
             InitializeComponent();
@@ -32,12 +33,14 @@ namespace CyberSecurityChatBotPOE_Part2
 
             if (userInput.ToLower().Contains("password"))
             {
+                lastTopic = "password";
+
                 string[] passwordResponses =
-            {
+                {
                 "Use strong unique passwords.",
                 "Avoid using personal information in passwords.",
                 "Change passwords regularly for better security."
-            };
+                };
 
                 Random random = new Random();
 
@@ -50,6 +53,21 @@ namespace CyberSecurityChatBotPOE_Part2
             else if (userInput.ToLower().Contains("privacy"))
             {
                 response = "Review your privacy settings regularly.";
+            }
+            else if (userInput.ToLower().Contains("more") || userInput.ToLower().Contains("another"))
+            {
+                if (lastTopic == "password")
+                {
+                    response = "Consider using a password manager for better security.";
+                }
+                else if (lastTopic == "scam")
+                {
+                    response = "Always verify suspicious messages before responding.";
+                }
+                else
+                {
+                    response = "Please ask about a cybersecurity topic first.";
+                }
             }
             else
             {
