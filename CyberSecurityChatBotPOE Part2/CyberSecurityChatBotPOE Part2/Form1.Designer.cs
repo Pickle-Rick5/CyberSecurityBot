@@ -28,28 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            CybersecurityAwarenessBot = new Label();
             richTextBox1 = new RichTextBox();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             btnSend = new Button();
             SuspendLayout();
             // 
-            // label1
+            // CybersecurityAwarenessBot
             // 
-            label1.AccessibleName = "Title";
-            label1.AutoSize = true;
-            label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.Location = new Point(396, 67);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(318, 27);
-            label1.TabIndex = 0;
-            label1.Text = "CYBERSECURITY AWARENESS BOT";
+            CybersecurityAwarenessBot.AccessibleName = "Title";
+            CybersecurityAwarenessBot.AutoSize = true;
+            CybersecurityAwarenessBot.BorderStyle = BorderStyle.Fixed3D;
+            CybersecurityAwarenessBot.Location = new Point(396, 67);
+            CybersecurityAwarenessBot.Margin = new Padding(4, 0, 4, 0);
+            CybersecurityAwarenessBot.Name = "CybersecurityAwarenessBot";
+            CybersecurityAwarenessBot.Size = new Size(318, 27);
+            CybersecurityAwarenessBot.TabIndex = 0;
+            CybersecurityAwarenessBot.Text = "CYBERSECURITY AWARENESS BOT";
             // 
             // richTextBox1
             // 
             richTextBox1.AccessibleName = "rtbChat";
+            richTextBox1.BorderStyle = BorderStyle.FixedSingle;
             richTextBox1.Location = new Point(25, 165);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
@@ -67,6 +68,7 @@
             // textBox2
             // 
             textBox2.AccessibleName = "txtUserInput";
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Location = new Point(350, 413);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(410, 33);
@@ -96,7 +98,7 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(richTextBox1);
-            Controls.Add(label1);
+            Controls.Add(CybersecurityAwarenessBot);
             Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.HotTrack;
             Margin = new Padding(4, 5, 4, 5);
@@ -109,7 +111,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label CybersecurityAwarenessBot;
         private RichTextBox richTextBox1;
         private TextBox textBox1;
         private TextBox textBox2;
