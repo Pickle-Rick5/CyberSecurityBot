@@ -2,8 +2,14 @@ namespace CyberSecurityChatBotPOE_Part2
 {
     public partial class Form1 : Form
     {
-        // stores the last cybersecurity topic the user talked about
+        // remembers the last topic so the bot can answer follow-up questions
         string lastTopic = "";
+
+        // remembers the user's favourite cybersecurity topic
+        string favouriteTopic = "";
+
+        // random object used for selecting random responses
+        Random random = new Random();
 
         public Form1()
         {
@@ -15,41 +21,63 @@ namespace CyberSecurityChatBotPOE_Part2
 
         }
 
-        // nothing here yet but keeping it in case i need it later
+        // keeping this here in case i want to add title click features later
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        // textbox event
+        // textbox event, not really needed right now but it can stay
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        // main chatbot logic happens here when user clicks send
+        // main chatbot logic runs when the send button is clicked
         private void btnSend_Click(object sender, EventArgs e)
         {
-            // gets what the user typed
+            // gets the user's message
             string userInput = textBox2.Text.Trim();
 
-            // converts input to lowercase to make checking easier
+            // makes the input lowercase so keyword checking is easier
             string input = userInput.ToLower();
 
-            // stops empty messages from being sent
+            // stops blank messages from being sent
             if (string.IsNullOrWhiteSpace(userInput))
             {
                 MessageBox.Show("Please enter a message.");
                 return;
             }
 
-            // shows user message in the chat area
+            // shows the user's message in the chat display
             richTextBox1.AppendText("You: " + userInput + Environment.NewLine);
 
             string response = "";
 
+            // memory feature: remembers the user's favourite topic
+            if (input.Contains("interested in"))
+            {
+                favouriteTopic = userInput.Substring(input.IndexOf("interested in") + 13).Trim();
+                lastTopic = favouriteTopic.ToLower();
+
+                response = "Great, I will remember that you are interested in " + favouriteTopic + ".";
+            }
+
+            // memory recall feature
+            else if (input.Contains("what do you remember") || input.Contains("remember"))
+            {
+                if (favouriteTopic != "")
+                {
+                    response = "I remember that you are interested in " + favouriteTopic + ".";
+                }
+                else
+                {
+                    response = "I do not have a favourite topic saved for you yet.";
+                }
+            }
+
             // sentiment detection section
-            if (input.Contains("worried"))
+            else if (input.Contains("worried"))
             {
                 response = "It is understandable to feel worried. Cybersecurity threats can be stressful, but staying informed helps you stay safe.";
             }
@@ -65,69 +93,100 @@ namespace CyberSecurityChatBotPOE_Part2
             // password topic with random responses
             else if (input.Contains("password"))
             {
-                // remembers last topic
                 lastTopic = "password";
 
-                // list of password responses
                 string[] passwordResponses =
                 {
-                    "Use strong unique passwords.",
-                    "Avoid using personal information in passwords.",
-                    "Change passwords regularly for better security."
+                    "Use strong, unique passwords for every account.",
+                    "Avoid using personal information like your name or birthday in passwords.",
+                    "A password manager can help you create and store secure passwords safely."
                 };
 
-                // randomly chooses a response
-                Random random = new Random();
                 response = passwordResponses[random.Next(passwordResponses.Length)];
             }
 
-            // scam topic
+            // scam topic with random responses
             else if (input.Contains("scam"))
             {
                 lastTopic = "scam";
-                response = "Avoid suspicious links and messages.";
+
+                string[] scamResponses =
+                {
+                    "Avoid clicking suspicious links or replying to unknown messages.",
+                    "Scammers often create urgency, so always pause and verify first.",
+                    "Never share OTP codes, banking details, or passwords with anyone online."
+                };
+
+                response = scamResponses[random.Next(scamResponses.Length)];
             }
 
-            // privacy topic
+            // privacy topic with random responses
             else if (input.Contains("privacy"))
             {
                 lastTopic = "privacy";
-                response = "Review your privacy settings regularly.";
+
+                string[] privacyResponses =
+                {
+                    "Review your privacy settings regularly on social media accounts.",
+                    "Limit the amount of personal information you share online.",
+                    "Check app permissions and remove access that is not needed."
+                };
+
+                response = privacyResponses[random.Next(privacyResponses.Length)];
             }
 
-            // conversation flow section
-            else if (input.Contains("more") || input.Contains("another"))
+            // phishing topic
+            else if (input.Contains("phishing"))
             {
-                // gives extra info depending on previous topic
+                lastTopic = "phishing";
+
+                string[] phishingResponses =
+                {
+                    "Be careful of emails asking for personal information.",
+                    "Check the sender's email address before clicking links.",
+                    "Do not download attachments from unknown or suspicious emails."
+                };
+
+                response = phishingResponses[random.Next(phishingResponses.Length)];
+            }
+
+            // conversation flow for follow-up questions
+            else if (input.Contains("more") || input.Contains("another") || input.Contains("explain"))
+            {
                 if (lastTopic == "password")
                 {
-                    response = "Consider using a password manager for better security.";
+                    response = "Another password tip is to enable multi-factor authentication wherever possible.";
                 }
                 else if (lastTopic == "scam")
                 {
-                    response = "Always verify suspicious messages before responding.";
+                    response = "Another scam tip is to verify messages directly with the company before trusting them.";
                 }
                 else if (lastTopic == "privacy")
                 {
-                    response = "Limit what personal information you share online and review app permissions.";
+                    response = "For privacy, avoid oversharing your location, phone number, or personal routines online.";
+                }
+                else if (lastTopic == "phishing")
+                {
+                    response = "For phishing, always hover over links or inspect them before clicking.";
                 }
                 else
                 {
-                    response = "Please ask about a cybersecurity topic first.";
+                    response = "Please ask about a cybersecurity topic first, such as passwords, scams, privacy, or phishing.";
                 }
             }
 
             // default response for unknown inputs
             else
             {
-                response = "I do not understand. Can you rephrase?";
+                response = "I am not sure I understand. Please ask about passwords, scams, privacy, phishing, or cybersecurity tips.";
             }
 
             // displays bot response
-            richTextBox1.AppendText("Bot: " + response + Environment.NewLine);
+            richTextBox1.AppendText("Bot: " + response + Environment.NewLine + Environment.NewLine);
 
             // clears textbox after sending
             textBox2.Clear();
+            textBox2.Focus();
         }
     }
-}
+} 
