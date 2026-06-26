@@ -50,6 +50,7 @@ namespace CyberSecurityChatBotPOE_Part2
         {
             string entry = DateTime.Now.ToString("HH:mm:ss") + " - " + action;
             activityLog.Add(entry);
+
         }
 
         // cleans user input to make it easier to understand
@@ -130,6 +131,7 @@ namespace CyberSecurityChatBotPOE_Part2
                 input.Contains("hey"))
             {
                 response = "Hello! How can I help you stay safe online today?";
+                LogActivity("Bot responded with greeting message");
             }
 
             else if (input.Contains("bye") ||
@@ -172,6 +174,7 @@ namespace CyberSecurityChatBotPOE_Part2
                 };
 
                 response = passwordResponses[random.Next(passwordResponses.Length)];
+                LogActivity("Bot gave password security advice");
             }
 
             // scam topic with random responses
@@ -189,6 +192,7 @@ namespace CyberSecurityChatBotPOE_Part2
                 };
 
                 response = scamResponses[random.Next(scamResponses.Length)];
+                LogActivity("Bot provided scam/fraud safety advice");
             }
 
             // privacy topic with random responses
@@ -206,6 +210,7 @@ namespace CyberSecurityChatBotPOE_Part2
                 };
 
                 response = privacyResponses[random.Next(privacyResponses.Length)];
+                LogActivity("Bot explained phishing awareness tips");
             }
 
             // phishing topic
@@ -223,6 +228,7 @@ namespace CyberSecurityChatBotPOE_Part2
                 };
 
                 response = phishingResponses[random.Next(phishingResponses.Length)];
+                LogActivity("Bot gave privacy protection advice");
             }
 
             // conversation flow for follow-up questions
@@ -334,7 +340,7 @@ namespace CyberSecurityChatBotPOE_Part2
 
             lstTasks.Items.Add(task);
 
-            activityLog.Add("Added task: " + task.Title);
+            LogActivity("User added task: " + task.Title);
 
             MessageBox.Show("Task added successfully!");
         }
@@ -348,12 +354,18 @@ namespace CyberSecurityChatBotPOE_Part2
                 lstTasks.Items.Add(task);
             }
 
-            activityLog.Add("Viewed tasks.");
+            LogActivity("User viewed tasks list");
         }
 
         private void btnActivityLog_Click(object sender, EventArgs e)
         {
-            string log = "";
+            if (activityLog.Count == 0)
+            {
+                MessageBox.Show("No activity recorded yet.");
+                return;
+            }
+
+            string log = "=== ACTIVITY LOG ===\n\n";
 
             foreach (string item in activityLog)
             {
@@ -421,7 +433,7 @@ namespace CyberSecurityChatBotPOE_Part2
     "• Keep software updated",
     "Quiz Results");
 
-            activityLog.Add("Completed cybersecurity quiz. Score: " + score + "/5");
+            LogActivity("User completed quiz. Score: " + score + "/5");
 
             richTextBox1.AppendText(
                 "Bot: Quiz completed. Your score was "
