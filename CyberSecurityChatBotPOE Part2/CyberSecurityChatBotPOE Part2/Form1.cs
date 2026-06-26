@@ -46,6 +46,24 @@ namespace CyberSecurityChatBotPOE_Part2
             InitializeComponent();
         }
 
+        private void LogActivity(string action)
+        {
+            string entry = DateTime.Now.ToString("HH:mm:ss") + " - " + action;
+            activityLog.Add(entry);
+        }
+
+        // cleans user input to make it easier to understand
+        private string CleanInput(string input)
+        {
+            input = input.ToLower();
+
+            input = input.Replace("?", "");
+            input = input.Replace(".", "");
+            input = input.Replace(",", "");
+            input = input.Replace("!", "");
+
+            return input.Trim();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -70,7 +88,7 @@ namespace CyberSecurityChatBotPOE_Part2
             string userInput = textBox2.Text.Trim();
 
             // makes the input lowercase so keyword checking is easier
-            string input = userInput.ToLower();
+            string input = CleanInput(userInput);
 
             // stops blank messages from being sent
             if (string.IsNullOrWhiteSpace(userInput))
@@ -107,6 +125,24 @@ namespace CyberSecurityChatBotPOE_Part2
             }
 
             // sentiment detection section
+            if (input.Contains("hello") ||
+                input.Contains("hi") ||
+                input.Contains("hey"))
+            {
+                response = "Hello! How can I help you stay safe online today?";
+            }
+
+            else if (input.Contains("bye") ||
+         input.Contains("goodbye"))
+            {
+                response = "Goodbye! Stay safe online and remember to protect your information.";
+            }
+
+            else if (input.Contains("thank"))
+            {
+                response = "You're welcome! I'm always here to help with cybersecurity advice.";
+            }
+
             else if (input.Contains("worried"))
             {
                 response = "It is understandable to feel worried. Cybersecurity threats can be stressful, but staying informed helps you stay safe.";
@@ -120,8 +156,11 @@ namespace CyberSecurityChatBotPOE_Part2
                 response = "Curiosity is great in cybersecurity. Learning more helps protect you online.";
             }
 
+
             // password topic with random responses
-            else if (input.Contains("password"))
+            else if (input.Contains("password") ||
+                     input.Contains("passwords") ||
+                     input.Contains("passcode"))
             {
                 lastTopic = "password";
 
@@ -136,7 +175,9 @@ namespace CyberSecurityChatBotPOE_Part2
             }
 
             // scam topic with random responses
-            else if (input.Contains("scam"))
+            else if (input.Contains("scam") ||
+                     input.Contains("fraud") ||
+                     input.Contains("fake"))
             {
                 lastTopic = "scam";
 
@@ -151,7 +192,9 @@ namespace CyberSecurityChatBotPOE_Part2
             }
 
             // privacy topic with random responses
-            else if (input.Contains("privacy"))
+            else if (input.Contains("privacy") ||
+         input.Contains("personal information") ||
+         input.Contains("data"))
             {
                 lastTopic = "privacy";
 
@@ -166,7 +209,9 @@ namespace CyberSecurityChatBotPOE_Part2
             }
 
             // phishing topic
-            else if (input.Contains("phishing"))
+            else if (input.Contains("phishing") ||
+         input.Contains("email scam") ||
+         input.Contains("fake email"))
             {
                 lastTopic = "phishing";
 
@@ -181,7 +226,10 @@ namespace CyberSecurityChatBotPOE_Part2
             }
 
             // conversation flow for follow-up questions
-            else if (input.Contains("more") || input.Contains("another") || input.Contains("explain"))
+            else if (input.Contains("more") ||
+                     input.Contains("tell me more") ||
+                     input.Contains("explain") ||
+                     input.Contains("another tip"))
             {
                 if (lastTopic == "password")
                 {
@@ -203,6 +251,33 @@ namespace CyberSecurityChatBotPOE_Part2
                 {
                     response = "Please ask about a cybersecurity topic first, such as passwords, scams, privacy, or phishing.";
                 }
+            }
+
+            else if (input.Contains("best password"))
+            {
+                response =
+                    "The best passwords are long, unique, and contain a mixture of letters, numbers, and symbols.";
+            }
+
+            else if (input.Contains("i am scared"))
+            {
+                response =
+                    "Cyber threats can seem scary, but learning good security habits greatly reduces your risk online.";
+            }
+
+            // simple NLP simulation using keyword matching and input cleaning
+            // allows the chatbot to recognise different ways users ask questions
+
+            else if (input.Contains("help"))
+            {
+                response =
+                    "I can help you with:\n" +
+                    "- Passwords\n" +
+                    "- Scams\n" +
+                    "- Privacy\n" +
+                    "- Phishing\n" +
+                    "- Cybersecurity tasks\n" +
+                    "- Cybersecurity quiz";
             }
 
             // default response for unknown inputs
