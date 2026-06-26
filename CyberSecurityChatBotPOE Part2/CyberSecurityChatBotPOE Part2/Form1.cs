@@ -11,6 +11,12 @@ namespace CyberSecurityChatBotPOE_Part2
         // random object used for selecting random responses
         Random random = new Random();
 
+        // stores all the tasks the user creates
+        List<CyberTask> tasks = new List<CyberTask>();
+
+        // keeps a log of everything the user does
+        List<string> activityLog = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -207,6 +213,73 @@ namespace CyberSecurityChatBotPOE_Part2
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddTask_Click(object sender, EventArgs e)
+        {
+            string taskName = Microsoft.VisualBasic.Interaction.InputBox(
+                "Enter a cybersecurity task:",
+                "Add Task");
+
+            if (taskName == "")
+                return;
+
+            CyberTask task = new CyberTask();
+
+            task.Title = taskName;
+            task.Description = "Cybersecurity reminder";
+            task.Reminder = DateTime.Now.AddDays(1).ToShortDateString();
+            task.IsCompleted = false;
+
+            tasks.Add(task);
+
+            lstTasks.Items.Add(task);
+
+            activityLog.Add("Added task: " + task.Title);
+
+            MessageBox.Show("Task added successfully!");
+        }
+
+        private void btnViewTasks_Click(object sender, EventArgs e)
+        {
+            lstTasks.Items.Clear();
+
+            foreach (CyberTask task in tasks)
+            {
+                lstTasks.Items.Add(task);
+            }
+
+            activityLog.Add("Viewed tasks.");
+        }
+
+        private void btnActivityLog_Click(object sender, EventArgs e)
+        {
+            string log = "";
+
+            foreach (string item in activityLog)
+            {
+                log += item + Environment.NewLine;
+            }
+
+            MessageBox.Show(log, "Activity Log");
+        }
+
+        private void lstTasks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstTasks.SelectedIndex == -1)
+                return;
+
+            tasks[lstTasks.SelectedIndex].IsCompleted = true;
+
+            lstTasks.Items.Clear();
+
+            foreach (CyberTask task in tasks)
+            {
+                lstTasks.Items.Add(task);
+            }
+
+            activityLog.Add("Completed task: " +
+                            tasks[lstTasks.SelectedIndex].Title);
         }
     }
 
