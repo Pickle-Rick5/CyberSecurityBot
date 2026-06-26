@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace CyberSecurityChatBotPOE_Part2
 {
     public partial class Form1 : Form
@@ -16,6 +18,28 @@ namespace CyberSecurityChatBotPOE_Part2
 
         // keeps a log of everything the user does
         List<string> activityLog = new List<string>();
+        // quiz questions
+        string[] questions =
+        {
+    "What is phishing?\nA. A hacking technique\nB. A fake message used to steal information\nC. A computer virus",
+
+    "Which password is the strongest?\nA. password123\nB. Jason2004\nC. T!g3r@89#",
+
+    "What should you do if you receive a suspicious email?\nA. Open the attachment\nB. Click the link immediately\nC. Verify the sender first",
+
+    "What does 2FA stand for?\nA. Two-Factor Authentication\nB. Two File Access\nC. Two Firewall Applications",
+
+    "Why are software updates important?\nA. They make the computer heavier\nB. They often fix security vulnerabilities\nC. They delete viruses automatically"
+};
+
+        string[] answers =
+        {
+    "B",
+    "C",
+    "C",
+    "A",
+    "B"
+};
 
         public Form1()
         {
@@ -280,6 +304,56 @@ namespace CyberSecurityChatBotPOE_Part2
 
             activityLog.Add("Completed task: " +
                             tasks[lstTasks.SelectedIndex].Title);
+        }
+
+        private void btnQuiz_Click(object sender, EventArgs e)
+        {
+            int score = 0;
+
+            for (int i = 0; i < questions.Length; i++)
+            {
+                string userAnswer = Microsoft.VisualBasic.Interaction.InputBox(
+                    questions[i],
+                    "Cybersecurity Quiz");
+
+                if (userAnswer.ToUpper() == answers[i])
+                {
+                    score++;
+                }
+            }
+
+            string result = "";
+
+            if (score == 5)
+            {
+                result = "Excellent! You scored 5/5 🏆";
+            }
+            else if (score >= 3)
+            {
+                result = "Good job! You scored " + score + "/5 👍";
+            }
+            else
+            {
+                result = "You scored " + score + "/5. Keep learning about cybersecurity! 🛡️";
+            }
+
+            MessageBox.Show(
+    result +
+    "\n\nRemember:\n" +
+    "• Use strong passwords\n" +
+    "• Avoid phishing emails\n" +
+    "• Enable Two-Factor Authentication\n" +
+    "• Keep software updated",
+    "Quiz Results");
+
+            activityLog.Add("Completed cybersecurity quiz. Score: " + score + "/5");
+
+            richTextBox1.AppendText(
+                "Bot: Quiz completed. Your score was "
+                + score +
+                "/5."
+                + Environment.NewLine
+                + Environment.NewLine);
         }
     }
 

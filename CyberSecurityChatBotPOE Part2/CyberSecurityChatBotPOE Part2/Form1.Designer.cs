@@ -146,6 +146,7 @@
             btnQuiz.TabIndex = 3;
             btnQuiz.Text = "Start Quiz";
             btnQuiz.UseVisualStyleBackColor = false;
+            btnQuiz.Click += btnQuiz_Click;
             // 
             // lstTasks
             // 
